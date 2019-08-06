@@ -11,42 +11,59 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-@Entity(name = "authenticate")
+
+@Entity(name = "cuser")
 public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer uid;
+	private Integer id;
 
 	@Column(unique = true)
 	private String username;
 
+	private String password;
 	private String firstName;
 	private String lastName;
 	private String mnumber;
-	private String password;
 
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<CompanyPost> companyposts;
+	private List<CompanyPost> posts;
 
 	public User() {
 
 	}
 
-	public Integer getUid() {
-		return uid;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setUid(Integer uid) {
-		this.uid = uid;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
-	public String getUsername() {
+	public String getusername() {
 		return username;
 	}
 
-	public void setUsername(String username) {
+	public void setusername(String username) {
 		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public List<CompanyPost> getPosts() {
+		return posts;
+	}
+
+	public void setPosts(List<CompanyPost> posts) {
+		this.posts = posts;
 	}
 
 	public String getFirstName() {
@@ -69,30 +86,22 @@ public class User {
 		return mnumber;
 	}
 
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", firstName=" + firstName
+				+ ", lastName=" + lastName + ", mnumber=" + mnumber + ", posts=" + posts + "]";
+	}
+
 	public void setMnumber(String mnumber) {
 		this.mnumber = mnumber;
 	}
 
-	public String getPassword() {
-		return password;
-	}
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
 
-	public List<CompanyPost> getCompanyposts() {
-		return companyposts;
-	}
+	
 
-	public void setCompanyposts(List<CompanyPost> companyposts) {
-		this.companyposts = companyposts;
-	}
+	
 
-	@Override
-	public String toString() {
-		return "User [uid=" + uid + ", username=" + username + ", firstName=" + firstName + ", lastName=" + lastName
-				+ ", mnumber=" + mnumber + ", password=" + password + "]";
-	}
 
 }
+

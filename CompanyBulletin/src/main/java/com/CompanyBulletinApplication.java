@@ -19,14 +19,17 @@ public class CompanyBulletinApplication {
         return new WebMvcConfigurerAdapter() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/companyposts/signin").allowedOrigins("http://localhost:4200");
-                registry.addMapping("/companyposts/signin").allowCredentials(true);
+                registry.addMapping("/company/signin").allowedOrigins("*");
+                registry.addMapping("/company/signin").allowCredentials(true);
                 
-                registry.addMapping("/companyposts/signup").allowedOrigins("http://localhost:4200");
-                registry.addMapping("/companyposts/signup").allowCredentials(true);
+                registry.addMapping("/company/signup").allowedOrigins("*");
+                registry.addMapping("/company/signup").allowCredentials(true);
                 
-                registry.addMapping("/companyposts/signout").allowedOrigins("http://localhost:4200");
-                registry.addMapping("/companyposts/signout").allowCredentials(true);
+                registry.addMapping("/company/signout").allowedOrigins("*");
+                registry.addMapping("/company/signout").allowCredentials(true);
+                
+                registry.addMapping("/info/*").allowedOrigins("*");
+                registry.addMapping("/info/*").allowCredentials(true);
             }
         };
 }

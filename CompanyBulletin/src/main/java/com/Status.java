@@ -2,6 +2,7 @@ package com;
 
 public class Status {
 
+
 	private boolean queryStatus;
 
 	public Status() {

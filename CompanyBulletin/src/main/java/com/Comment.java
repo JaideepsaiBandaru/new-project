@@ -10,8 +10,9 @@ import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-@Entity(name = "comment")
 
+
+@Entity(name = "com")
 public class Comment {
 
 	@Id
@@ -23,15 +24,16 @@ public class Comment {
 	private String commentText;
 
 	@ManyToOne
-	private CompanyPost companypost;
+	private CompanyPost post;
 
 	public Comment() {
+
 	}
 
-	public Comment(Integer commentId, String commentText, CompanyPost companypost) {
+	public Comment(Integer commentId, String commentText, CompanyPost post) {
 		this.commentId = commentId;
 		this.commentText = commentText;
-		this.companypost = companypost;
+		this.post = post;
 	}
 
 	public Integer getCommentId() {
@@ -42,14 +44,6 @@ public class Comment {
 		this.commentId = commentId;
 	}
 
-	public Integer getFk() {
-		return fk;
-	}
-
-	public void setFk(Integer fk) {
-		this.fk = fk;
-	}
-
 	public String getCommentText() {
 		return commentText;
 	}
@@ -58,19 +52,25 @@ public class Comment {
 		this.commentText = commentText;
 	}
 
-	@JsonIgnore
-	public CompanyPost getCompanypost() {
-		return companypost;
+	public Integer getFk() {
+		return fk;
 	}
 
-	public void setCompanypost(CompanyPost companypost) {
-		this.companypost = companypost;
+	public void setFk(Integer fk) {
+		this.fk = fk;
+	}
+
+	@JsonIgnore
+	public CompanyPost getPost() {
+		return post;
+	}
+
+	public void setPost(CompanyPost post) {
+		this.post = post;
 	}
 
 	@Override
 	public String toString() {
-		return "Comment [commentId=" + commentId + ", commentText=" + commentText + ", companypost=" + companypost
-				+ "]";
+		return "Comment [id=" + commentId + ", commentText=" + commentText + ", post=" + post + "]";
 	}
-
 }

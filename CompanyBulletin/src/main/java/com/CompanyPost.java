@@ -8,57 +8,50 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-@Entity(name = "company")
+@Entity(name = "pcom")
 public class CompanyPost {
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer pid;
+	private Integer id;
+	private String title;
+	private String body;
+
+	@OneToMany(mappedBy = "post", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Comment> comments;
 
 	@Transient
 	private Integer ufk;
 
-	private String title;
-	private String body;
-
 	@ManyToOne
 	private User user;
 
-	@OneToMany(mappedBy = "companypost", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<Comment> comments;
+	@JsonIgnore
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 
 	public CompanyPost() {
 
 	}
 
-	public CompanyPost(Integer pid, String title, String body, User user) {
-		super();
-		this.pid = pid;
-		this.title = title;
-		this.body = body;
-		this.user = user;
+	public int getId() {
+		return id;
 	}
 
-	public Integer getPid() {
-		return pid;
-	}
-
-	public void setPid(Integer pid) {
-		this.pid = pid;
-	}
-
-	public Integer getUfk() {
-		return ufk;
-	}
-
-	public void setUfk(Integer ufk) {
-		this.ufk = ufk;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getTitle() {
@@ -77,15 +70,6 @@ public class CompanyPost {
 		this.body = body;
 	}
 
-	@JsonIgnore
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
 	public List<Comment> getComments() {
 		return comments;
 	}
@@ -94,9 +78,18 @@ public class CompanyPost {
 		this.comments = comments;
 	}
 
+	public Integer getUfk() {
+		return ufk;
+	}
+
+	public void setUfk(Integer ufk) {
+		this.ufk = ufk;
+	}
+
 	@Override
 	public String toString() {
-		return "CompanyPost [pid=" + pid + ", title=" + title + ", body=" + body + ", user=" + user + "]";
+		return "Post [id=" + id + ", title=" + title + ", body=" + body + ", comments=" + comments + ", ufk=" + ufk
+				+ ", user=" + user + "]";
 	}
 
 }
